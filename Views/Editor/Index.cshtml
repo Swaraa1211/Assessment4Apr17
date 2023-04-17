@@ -1,0 +1,29 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<h2>Live Documents Here!</h2>
+
+<a href="/Editor/Create"><button class="btn-primary float-right"> Design Here</button></a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Document ID</th>
+            <th>Author Name</th>
+            <th>Title</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (EditorModel editor in @ViewBag.EditorList)
+        {
+            <tr>
+                <td>@editor.DocumentID</td>
+                <td>@editor.Author</td>
+                <td>@editor.DocumentTitle</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
