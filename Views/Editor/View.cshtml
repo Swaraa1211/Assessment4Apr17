@@ -14,5 +14,13 @@
     @Html.DisplayFor(model => model.DocumentContent)
 </div>
 <div>
-    <a asp-action="Index"><button class="my-button" type="submit">Back</button></a>
+    
+    <form  asp-action="Download" asp-controller="Editor">
+        <a asp-action="Index"><button class="my-button" type="submit">Back</button></a>
+            <input type="hidden" value="@Model.DocumentTitle" name="DocumentTitle" />
+            <input type="hidden" value="@Model.DocumentContent" name="DocumentContent" />
+            <button class="btn-primary">Save!</button>
+           
+    </form>
+
 </div>

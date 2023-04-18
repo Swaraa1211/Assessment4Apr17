@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using System.Configuration;
 using System.Data;
+using System.Text;
 
 namespace Assessment4Apr17.Controllers
 {
@@ -130,6 +131,18 @@ namespace Assessment4Apr17.Controllers
         {
             //return RedirectToAction("Index");
             return View(GetDocument(id));
+        }
+        [HttpPost]
+        public FileResult Download(IFormCollection editorForm)
+        {
+            string documentTitle = editorForm["DocumentTitle"];
+            string documentContent = editorForm["DocumentContent"];
+            // Generate the file content
+            byte[] fileBytes = Encoding.ASCII.GetBytes(documentContent);
+            //string fileName = "form-content.txt";
+
+            // Return the file as a downloadable content
+            return File(fileBytes, "text/plain", $"{documentTitle}.txt");
         }
     }
 }

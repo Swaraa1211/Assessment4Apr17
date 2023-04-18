@@ -13,7 +13,7 @@ namespace Assessment4Apr17
                                     builder.Services.AddDbContext<DBEditorContext>(options =>
                 options.UseSqlServer(connectionString));
 
-                                                builder.Services.AddDefaultIdentity<EditorUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                                                builder.Services.AddDefaultIdentity<EditorUser>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddEntityFrameworkStores<DBEditorContext>();
 
             // Add services to the container.
@@ -35,7 +35,7 @@ namespace Assessment4Apr17
             app.MapRazorPages();
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Editor}/{action=Index}/{id?}");
+                pattern: "{controller=Home}/{action=Index}/{id?}");
 
             app.Run();
         }
