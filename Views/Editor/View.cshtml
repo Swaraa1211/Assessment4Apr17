@@ -1,0 +1,18 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "View";
+}
+@model Assessment4Apr17.Models.EditorModel
+
+<div>
+    <h6>@Html.DisplayNameFor(model => model.Author) - @Html.DisplayFor(model => model.Author) | @Html.DisplayNameFor(model => model.DocumentTitle) - @Html.DisplayFor(model => model.DocumentTitle)</h6>
+    <hr />
+</div>
+<div>
+    @Html.DisplayFor(model => model.DocumentContent)
+</div>
+<div>
+    <a asp-action="Index"><button class="my-button" type="submit">Back</button></a>
+</div>

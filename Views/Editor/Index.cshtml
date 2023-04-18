@@ -13,6 +13,7 @@
             <th>Document ID</th>
             <th>Author Name</th>
             <th>Title</th>
+            <th> Edit / View</th>
         </tr>
     </thead>
     <tbody>
@@ -22,6 +23,13 @@
                 <td>@editor.DocumentID</td>
                 <td>@editor.Author</td>
                 <td>@editor.DocumentTitle</td>
+                <td>@*<a href="/Editor/Edit"><button class="btn-primary float-right"> Edit</button></a>
+                    <a href="/Editor/View"><button class="btn-primary float-right"> View</button></a>*@
+
+                    <a asp-action="Edit" asp-route-id="@editor.DocumentID"><button class="my-button" type="submit">Edit</button></a>
+                    <a asp-action="View" asp-route-id="@editor.DocumentID"><button class="my-button" type="submit">View</button></a>
+
+                </td>
             </tr>
         }
     </tbody>

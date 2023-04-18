@@ -1,0 +1,32 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Edit";
+}
+@model Assessment4Apr17.Models.EditorModel
+<h2>
+    Edit Your Document
+</h2>
+<div>
+    <h6>@Html.DisplayNameFor(model => model.Author) - @Html.DisplayFor(model => model.Author) | @Html.DisplayNameFor(model => model.DocumentTitle) - @Html.DisplayFor(model => model.DocumentTitle)</h6>
+    <hr/>
+</div>
+<div>
+    <form asp-action="Edit">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="DocumentID" />
+        <div class="form-group">
+            <label asp-for="DocumentContent" class="control-label"></label>
+            <textarea asp-for="DocumentContent" style="width:1100px;height:380px" name="DocumentContent" value="@Model.DocumentContent">
+
+            </textarea>
+        </div>
+@*        <button class="btn-success" style="margin-left:950px">Save</button>*@
+        <div class="form-group">
+            <input type="submit" value="Save" class="my-button" /> |
+            <a asp-action="Index"><button class="my-button" type="submit">Back</button></a>
+
+        </div>
+    </form>
+</div>

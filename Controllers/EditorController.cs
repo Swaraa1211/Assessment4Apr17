@@ -1,6 +1,8 @@
 ﻿using Assessment4Apr17.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
+using System.Configuration;
+using System.Data;
 
 namespace Assessment4Apr17.Controllers
 {
@@ -71,6 +73,63 @@ namespace Assessment4Apr17.Controllers
             }
 
             return RedirectToAction("Index");
+        }
+
+        public EditorModel GetDocument(int id)
+
+        {
+            EditorModel editor = new EditorModel();
+            //string conn_string = _configuration.GetConnectionString("Text_Editor");
+            _connection.Open();
+            SqlCommand cmd = _connection.CreateCommand();
+
+            string query = $"SELECT * FROM Documents where DocumentID={id}";
+            cmd.CommandText = query;
+            SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                editor.Author = (string)reader["Author"];
+                editor.DocumentTitle = (string)reader["DocumentTitle"];
+                editor.DocumentContent = (string)reader["DocumentContent"];
+            }
+            reader.Close();
+            _connection.Close();
+            //appointmentList = db.AppointmentDetails.Where(x=>x.email==current_user_email).ToList();
+            return editor;
+        }
+
+        public IActionResult Edit(int id)
+        {
+            return View(GetDocument(id));
+        }
+
+        [HttpPost]
+        public IActionResult Edit(int id, EditorModel editor)
+        {
+            try
+            {
+                _connection.Open();
+                SqlCommand cmd = new SqlCommand("UPDATE_DOCUMENT", _connection);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                DateTime current_date = DateTime.Now;
+                cmd.Parameters.AddWithValue("@DocumentID", id);
+                cmd.Parameters.AddWithValue("@DocumentContent", editor.DocumentContent);
+
+                cmd.ExecuteNonQuery();
+
+                _connection.Close();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            return RedirectToAction("Index","Editor");
+        }
+        public IActionResult View(int id)
+        {
+            //return RedirectToAction("Index");
+            return View(GetDocument(id));
         }
     }
 }
